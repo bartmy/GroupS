@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GroupS - in development</title>
+  <link
+          rel="stylesheet"
+          href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+          integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+          crossorigin="anonymous"
+  />
+</head>
+<body>
+<main>
+  <form id="loginForm" class="pure-form pure-form-stacked" style="width: 60%; margin: 0 auto">
+    <fieldset>
+      <label for="loginUsername">Username</label>
+      <input type="text" id="loginUsername" placeholder="Username" />
+      <label for="loginPassword">Password</label>
+      <input type="password" id="loginPassword" placeholder="Password" />
+      <button type="submit" id="signInBtn" class="pure-button pure-button-primary">Sign in</button>
+      <label for="registerBtn">Not registered ?</label>
+      <button type="submit" id="registerBtn" class="pure-button pure-button-primary">Sign up here</button>
+    </fieldset>
+  </form>
+</main>
+<script>
+  (function () {
+    const API_URL = "http://localhost:8080/api";
+    const LOGIN_API_URL = `${API_URL}/todos`;
+
+    const loginUsername = document.getElementById("loginUsername");
+    const loginPassword = document.getElementById("loginPassword");
+
+    fetch(LOGIN_API_URL)
+      .then(processOkResponse)
+      .then((login))
+
+
+    function processOkResponse(response = {}) {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(`Status not 200 (${response.status})`);
+    }
+  })();
+</script>
+</body>
+</html>
