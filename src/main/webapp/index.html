@@ -46,6 +46,13 @@
         >
           Sign in
         </button>
+        <button
+          type="submit"
+          id="signUpBtn"
+          class="pure-button pure-button-primary"
+        >
+          Sign up
+        </button>
       </form>
       <form
         id="todoForm"
@@ -165,7 +172,47 @@
                   }
                 });
             });
+
+            document
+              .getElementById("signUpBtn")
+              .addEventListener("click",(event) =>{
+                event.preventDefault();
+                change_page_register();
+              })
         }
+        function initRegisterFormClick() {
+          const loginForm = document.getElementById("loginForm");
+
+          document
+            .getElementById("signInBtn")
+            .addEventListener("click", (event) => {
+              event.preventDefault();
+              const formObj = {
+                username: loginForm.elements.loginUsername.value,
+                password: loginForm.elements.loginPassword.value,
+                lang: loginForm.elements.lang.value,
+              };
+              fetch(`${API_URL}?${new URLSearchParams(formObj)}`)
+                .then((response) => response.text())
+                .then((text) => {
+                  document.getElementById("login").innerHTML = `
+                  <h1>${text}</h1>
+                  `;
+                  if (text === "login ok!") {
+                    loginForm.remove();
+                    change_page();
+                  } else {
+                    document.getElementById("loginForm").style.display =
+                      "block";
+                  }
+                });
+            });
+        }
+
+        function change_page_register() {
+          window.location.replace("register.html");
+        }
+
         function change_page() {
           window.location.replace("menu.html");
         }

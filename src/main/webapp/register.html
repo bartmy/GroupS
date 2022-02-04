@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>GroupS menu</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+      integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <main style="width: 70%; margin: 0 auto">
+      <div id="welcome" style="text-align: center">
+        <h1>Introduce yourself</h1>
+      </div>
+      <form id="registerForm" class="pure-form pure-form-aligned">
+        <fieldset>
+          <div class="pure-control-group">
+            <label for="registerUsername">Username</label>
+            <input
+              type="text"
+              id="registerUsername"
+              placeholder="username..."
+            />
+          </div>
+          <div class="pure-control-group">
+            <label for="registerPassword">Password</label>
+            <input
+              type="password"
+              id="registerPassword"
+              placeholder="password..."
+            />
+          </div>
+          <div class="pure-control-group">
+            <label for="registerEmail">Email Address</label>
+            <input type="email" id="registerEmail" placeholder="email..." />
+          </div>
+          <div class="pure-controls">
+            <button
+              type="submit"
+              id="addUser"
+              class="pure-button pure-button-primary"
+            >
+              Submit
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </main>
+
+    <script>
+      (function () {
+        const API_URL = "http://localhost:8080/register.html";
+        const REGISTER_API_URL = `${API_URL}/register`;
+
+        const registerUsernameText =
+          document.getElementById("registerUsername");
+        const registerUsernameText =
+          document.getElementById("registerPassword");
+        const registerUsernameText = document.getElementById("registerEmail");
+
+        fetch(REGISTER_API_URL).then(processOkResponse);
+
+        document
+          .getElementById("addUser")
+          .addEventListener("click", (event) => {
+            event.preventDefault();
+            fetch(REGISTER_API_URL, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username: registerUsernameText.value,
+                password: registerUsernameText.value,
+                email: registerUsernameText.value,
+              }),
+            })
+              .then(processOkResponse)
+              .then(createNewTodo)
+              .catch(console.warn);
+          });
+
+        function createNewTodo(todo) {
+          const label = document.createElement("label");
+          label.classList.add("pure-checkbox");
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.checked = todo.done;
+          checkbox.addEventListener("click", (event) => {
+            event.preventDefault();
+            fetch(`${TODO_API_URL}/${todo.id}`, { method: "PUT" })
+              .then(processOkResponse)
+              .then((updatedTodo) => (checkbox.checked = !!updatedTodo.done))
+              .catch(console.warn);
+          });
+          label.appendChild(checkbox);
+          label.appendChild(document.createTextNode(` ${todo.text}`));
+          document.getElementById("allTodos").appendChild(label);
+        }
+
+        initWelcomeFormClick();
+
+        function initWelcomeFormClick() {
+          const registerForm = document.getElementById("registerForm");
+
+          document
+            .getElementById("addUser")
+            .addEventListener("click", (event) => {
+              event.preventDefault();
+              const formObj = {
+                username: registerForm.elements.registerUsername.value,
+                password: registerForm.elements.registerPassword.value,
+                email: registerForm.elements.registerEmail.value,
+              };
+              fetch(`${REGISTER_API_URL}?${new URLSearchParams(formObj)}`)
+                .then((response) => response.text())
+                .then((text) => {
+                  document.getElementById("welcome").innerHTML = `
+                <h1>${text}</h1>
+            `;
+                  if (text === "register ok!") {
+                    registerForm.remove();
+                    change_page();
+                  } else {
+                    document.getElementById("loginForm").style.display =
+                      "block";
+                  }
+                });
+            });
+
+          function change_page() {
+            window.location.replace("menu.html");
+          }
+          function processOkResponse(response = {}) {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error(`Status not 200 (${response.status})`);
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
