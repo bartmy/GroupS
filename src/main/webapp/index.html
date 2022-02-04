@@ -156,15 +156,18 @@
                   document.getElementById("login").innerHTML = `
                   <h1>${text}</h1>
                   `;
-                  loginForm.remove();
                   if (text === "login ok!") {
-                    document.getElementById("todoForm").style.display = "block";
+                    loginForm.remove();
+                    change_page();
                   } else {
                     document.getElementById("loginForm").style.display =
                       "block";
                   }
                 });
             });
+        }
+        function change_page() {
+          window.location.replace("menu.html");
         }
 
         function processOkResponse(response = {}) {
