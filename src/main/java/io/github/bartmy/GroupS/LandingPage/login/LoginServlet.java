@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 class LoginServlet {
 
     private LoginService service;
@@ -18,11 +18,10 @@ class LoginServlet {
         this.service = service;
     }
 
-    @GetMapping(value = "/api", params = {"username", "password"})
+    @GetMapping(value = "/login", params = {"username", "password"})
     void login(@RequestParam String username, @RequestParam String password){
         log.info("Got request ");
         service.loginValidation(username, password);
-
     }
 }
 

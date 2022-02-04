@@ -1,49 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>GroupS - in development</title>
-  <link
-          rel="stylesheet"
-          href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
-          integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
-          crossorigin="anonymous"
-  />
-</head>
-<body>
-<main>
-  <form id="loginForm" class="pure-form pure-form-stacked" style="width: 60%; margin: 0 auto">
-    <fieldset>
-      <label for="loginUsername">Username</label>
-      <input type="text" id="loginUsername" placeholder="Username" />
-      <label for="loginPassword">Password</label>
-      <input type="password" id="loginPassword" placeholder="Password" />
-      <button type="submit" id="signInBtn" class="pure-button pure-button-primary">Sign in</button>
-      <label for="registerBtn">Not registered ?</label>
-      <button type="submit" id="registerBtn" class="pure-button pure-button-primary">Sign up here</button>
-    </fieldset>
-  </form>
-</main>
-<script>
-  (function () {
-    const API_URL = "http://localhost:8080/api";
-    const LOGIN_API_URL = `${API_URL}/todos`;
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+      integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <main>
+      <form
+        id="loginForm"
+        class="pure-form pure-form-stacked"
+        style="width: 60%; margin: 0 auto"
+      >
+        <fieldset>
+          <label for="loginUsername">Username</label>
+          <input
+            type="text"
+            id="loginUsername"
+            class="pure-input-rounded pure-u-1"
+            placeholder="Username"
+          />
+          <label for="loginPassword">Password</label>
+          <input
+            type="password"
+            id="loginPassword"
+            class="pure-input-rounded pure-u-1"
+            placeholder="Password"
+          />
+          <button
+            type="submit"
+            id="signInBtn"
+            class="pure-button pure-button-primary"
+          >
+            Sign in
+          </button>
+          <label for="registerBtn">Not registered ?</label>
+          <button
+            type="submit"
+            id="registerBtn"
+            class="pure-button pure-button-primary"
+          >
+            Sign up here
+          </button>
+        </fieldset>
+      </form>
+      <form class="pure-form">
+        <input
+          id="testForm"
+          type="email"
+          placeholder="Requires an email"
+          required=""
+        />
+      </form>
+    </main>
+    <script>
+      (function () {
+        const API_URL = "http://localhost:8080/api";
+        const LOGIN_API_URL = `${API_URL}/login`;
 
-    const loginUsername = document.getElementById("loginUsername");
-    const loginPassword = document.getElementById("loginPassword");
+        const loginForm = document.getElementById("loginForm");
 
-    fetch(LOGIN_API_URL)
-      .then(processOkResponse)
-      .then((login))
+        initLoginForm();
 
+        function initLoginForm() {
+          const loginUsername = document.getElementById("loginUsername");
+          const loginPassword = document.getElementById("loginPassword");
+          fetch(`${API_URL}`)
+            .then(processOkResponse)
+            .then((loginArr) => {
+              document.getElementById("loginForm").innerHTML = loginArr
+                .map(
+                  (login) => `
+              <label class="pure-input-rounded pure-u-1">
+                <input type="text" name="loginUsername" value="${login.username}">
+                <input type="text" name="loginPasword" value="${login.password}">
+              </label>
+          `
+                )
+                .join("\n");
+              initWelcomeFormClick();
+            });
 
-    function processOkResponse(response = {}) {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(`Status not 200 (${response.status})`);
-    }
-  })();
-</script>
-</body>
+          const fromObj = {
+            username: loginForm.elements.username.value,
+            password: loginForm.elements.password.value,
+          };
+          fetch(`${API_URL}?${new URLSearchParams(fromObj)}`).then(
+            (response) => {
+              loginForm.remove();
+              document.getElementById("testForm").style.display = "block";
+            }
+          );
+        }
+
+        // fetch(LOGIN_API_URL)
+        //   .then(processOkResponse)
+        //   .then((login) => login.array.forEach(creaateLoginSuccess));
+
+        // document
+        //       .getElementById("signInBtn")
+        //       .addEventListener("click", (event) => {
+        //         event.preventDefault();
+        //         fetch(Login_API_URL, {
+        //           method: "POST",
+        //           headers: {
+        //             Accept: "application/json",
+        //             "Content-Type": "application/json",
+        //           },
+        //           body: JSON.stringify({ text: todoText.value }),
+        //         })
+        //           .then(processOkResponse)
+        //           .then(createNewTodo)
+        //           .then(() => (todoText.value = ""))
+        //           .catch(console.warn);
+        //       });
+
+        function processOkResponse(response = {}) {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error(`Status not 200 (${response.status})`);
+        }
+      })();
+    </script>
+  </body>
 </html>

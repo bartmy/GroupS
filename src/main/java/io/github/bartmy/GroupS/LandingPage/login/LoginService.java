@@ -15,9 +15,14 @@ class LoginService {
         this.repository = repository;
     }
 
-    void loginValidation(String username, String password){
+    boolean loginValidation(String username, String password){
+        var loginOK = false;
         if (repository.findByUsernameAndPassword(username, password).isEmpty()) {
             log.info("login failed");
-        }else log.info("login success!");
+        }else {
+            log.info("login success!");
+            loginOK = true;
+        }
+        return loginOK;
     }
 }
