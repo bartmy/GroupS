@@ -11,15 +11,8 @@
     />
   </head>
   <body>
-    <main style="width: 40%; margin: 0 auto">
-      <div id="login" style="text-align: center">
-        <h1>Introduce yourself</h1>
-      </div>
-      <form
-        id="loginForm"
-        class="pure-form pure-form-stacked"
-        style="width: 60%; margin: 0 auto"
-      >
+    <main>
+      <form id="loginForm" class="pure-form pure-form-stacked" style="width: 60%; margin: 0 auto">
         <fieldset>
           <label for="loginUsername">Username</label>
           <input
@@ -46,24 +39,25 @@
         >
           Sign in
         </button>
-      </form>
-      <form
-        id="todoForm"
-        class="pure-form"
-        style="display: none; text-align: center"
-      >
         <fieldset>
-          <input
-            id="todoText"
-            class="pure-input-rounded pure-input-2-3"
-            placeholder="new TODO"
-          />
-          <button id="addTodo" class="pure-button pure-button-primary">
-            +
+          <label for="registerBtn">Not registered ?</label>
+          <button
+            type="submit"
+            id="registerBtn"
+            class="pure-button pure-button-primary"
+          >
+            Sign up here
           </button>
         </fieldset>
-        <fieldset id="allTodos"></fieldset>
       </form>
+      <!-- <form class="pure-form">
+        <input
+          id="testForm"
+          type="email"
+          placeholder="Requires an email"
+          required=""
+        />
+      </form> -->
     </main>
     <script>
       (function () {
@@ -112,9 +106,9 @@
           document.getElementById("allTodos").appendChild(label);
         }
 
-        initLoginForm();
+        initWelcomeForm();
 
-        function initLoginForm() {
+        function initWelcomeForm() {
           const CODE_TO_EMOJI = {
             pl: "🇵🇱",
             en: "🇺🇸",
@@ -134,37 +128,29 @@
           `
                 )
                 .join("\n");
-              initLoginFormClick();
+              initWelcomeFormClick();
             });
         }
 
-        function initLoginFormClick() {
-          const loginForm = document.getElementById("loginForm");
+        function initWelcomeFormClick() {
+          const welcomeForm = document.getElementById("welcomeForm");
 
-          document
-            .getElementById("signInBtn")
-            .addEventListener("click", (event) => {
-              event.preventDefault();
-              const formObj = {
-                username: loginForm.elements.loginUsername.value,
-                password: loginForm.elements.loginPassword.value,
-                lang: loginForm.elements.lang.value,
-              };
-              fetch(`${API_URL}?${new URLSearchParams(formObj)}`)
-                .then((response) => response.text())
-                .then((text) => {
-                  document.getElementById("login").innerHTML = `
-                  <h1>${text}</h1>
-                  `;
-                  loginForm.remove();
-                  if (text === "login ok!") {
-                    document.getElementById("todoForm").style.display = "block";
-                  } else {
-                    document.getElementById("loginForm").style.display =
-                      "block";
-                  }
-                });
-            });
+          document.getElementById("btn").addEventListener("click", (event) => {
+            event.preventDefault();
+            const formObj = {
+              name: welcomeForm.elements.name.value,
+              lang: welcomeForm.elements.lang.value,
+            };
+            fetch(`${API_URL}?${new URLSearchParams(formObj)}`)
+              .then((response) => response.text())
+              .then((text) => {
+                document.getElementById("welcome").innerHTML = `
+                <h1>${text}</h1>
+            `;
+                welcomeForm.remove();
+                document.getElementById("todoForm").style.display = "block";
+              });
+          });
         }
 
         function processOkResponse(response = {}) {
