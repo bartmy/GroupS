@@ -20,7 +20,9 @@ class RegistrationService {
     }
 
     public User createNewUser(User user) {
-        if (repository.findByUsername(user.getUsername()).isEmpty()) {
+        var usernameOK= repository.findByUsername(user.getUsername()).isEmpty();
+        var emailOK= repository.findByEmail(user.getEmail()).isEmpty();
+        if (usernameOK && emailOK) {
             return save(user);
         }else {
             log.warn("user already exists ");
