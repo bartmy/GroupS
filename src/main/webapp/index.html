@@ -113,10 +113,12 @@
     </main>
     <script>
       (function () {
-        const API_URL = "http://localhost:8080/api";
+        const HOME_URL = "http://localhost:8080/";
+        const API_URL = `${API_URL}/api`;
         const TODO_API_URL = `${API_URL}/todos`;
         const LOGIN_API_URL = `${API_URL}/login`;
         const REGISTER_API_URL = `${API_URL}/register`;
+        const PROFILE_URL = `${HOME_URL}/up`;
 
         const todoText = document.getElementById("todoText");
         const usernameText = document.getElementById("loginUsername");
@@ -167,6 +169,7 @@
                   `;
                   if (text === "login ok!") {
                     loginForm.remove();
+
                     change_page();
                   } else {
                     usernameText.value = "";
@@ -175,6 +178,23 @@
                 });
             });
           initRegisterForm();
+        }
+
+        function initProfile(user) {
+          fetch(`${PROFILE_URL}/${user.id}`)
+            .then(processOkResponse)
+            .then((user) => {
+              document.innerHTML = `
+                  <h1>hello ${user.username} !</h1>
+                  <p>nice to see you, your email is ${user.email}</p>
+                  `;
+            })
+            .then((response) => response.text())
+            .then((text) => {
+              document.getElementById("login").innerHTML = `
+                  <h1>${text}</h1>
+                  `;
+            });
         }
 
         function initRegisterForm() {

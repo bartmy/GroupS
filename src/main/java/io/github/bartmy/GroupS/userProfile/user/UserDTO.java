@@ -10,7 +10,7 @@ class UserDTO {
     private String username;
 
     public UserDTO(User user){
-        this.id = user.getId();
+        this.id = user.getUserId();
         this.username = user.getUsername();
     }
 

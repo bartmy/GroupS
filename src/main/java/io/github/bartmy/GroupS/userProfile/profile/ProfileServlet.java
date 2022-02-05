@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/profile")
+@RequestMapping("/up")
 class ProfileServlet {
 
     private ProfileService profileService;
@@ -14,10 +14,9 @@ class ProfileServlet {
         this.profileService = profileService;
     }
 
-    @GetMapping(value = "/{userId}")
-    void profileStart(@PathVariable Integer userId){
+    @GetMapping("/{userId}")
+    String profileStart(@PathVariable Integer userId){
         log.info("Profile request got");
-        profileService.startMenu(userId);
-    }
+        return  profileService.startMenu(userId);}
 }
 
