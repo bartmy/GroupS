@@ -13,7 +13,7 @@
   <body>
     <main style="width: 40%; margin: 0 auto">
       <div id="login" style="text-align: center">
-        <h1>Introduce yourself</h1>
+        <h1>Welcome to GroupS</h1>
       </div>
       <form
         id="loginForm"
@@ -54,6 +54,7 @@
           Sign up
         </button>
       </form>
+
       <form
         id="todoForm"
         class="pure-form"
@@ -71,53 +72,55 @@
         </fieldset>
         <fieldset id="allTodos"></fieldset>
       </form>
+
+      <form
+        id="registerForm"
+        class="pure-form pure-form-aligned"
+        style="display: none; text-align: center"
+      >
+        <fieldset>
+          <div class="pure-control-group">
+            <label for="registerUsername">Username</label>
+            <input
+              type="text"
+              id="registerUsername"
+              placeholder="username..."
+            />
+          </div>
+          <div class="pure-control-group">
+            <label for="registerPassword">Password</label>
+            <input
+              type="password"
+              id="registerPassword"
+              placeholder="password..."
+            />
+          </div>
+          <div class="pure-control-group">
+            <label for="registerEmail">Email Address</label>
+            <input type="email" id="registerEmail" placeholder="email..." />
+          </div>
+          <div class="pure-controls">
+            <button
+              type="submit"
+              id="addUser"
+              class="pure-button pure-button-primary"
+            >
+              Submit
+            </button>
+          </div>
+        </fieldset>
+      </form>
     </main>
     <script>
       (function () {
         const API_URL = "http://localhost:8080/api";
         const TODO_API_URL = `${API_URL}/todos`;
+        const LOGIN_API_URL = `${API_URL}/login`;
+        const REGISTER_API_URL = `${API_URL}/register`;
 
         const todoText = document.getElementById("todoText");
-
-        fetch(TODO_API_URL)
-          .then(processOkResponse)
-          .then((todos) => todos.forEach(createNewTodo));
-
-        document
-          .getElementById("addTodo")
-          .addEventListener("click", (event) => {
-            event.preventDefault();
-            fetch(TODO_API_URL, {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ text: todoText.value }),
-            })
-              .then(processOkResponse)
-              .then(createNewTodo)
-              .then(() => (todoText.value = ""))
-              .catch(console.warn);
-          });
-
-        function createNewTodo(todo) {
-          const label = document.createElement("label");
-          label.classList.add("pure-checkbox");
-          const checkbox = document.createElement("input");
-          checkbox.type = "checkbox";
-          checkbox.checked = todo.done;
-          checkbox.addEventListener("click", (event) => {
-            event.preventDefault();
-            fetch(`${TODO_API_URL}/${todo.id}`, { method: "PUT" })
-              .then(processOkResponse)
-              .then((updatedTodo) => (checkbox.checked = !!updatedTodo.done))
-              .catch(console.warn);
-          });
-          label.appendChild(checkbox);
-          label.appendChild(document.createTextNode(` ${todo.text}`));
-          document.getElementById("allTodos").appendChild(label);
-        }
+        const usernameText = document.getElementById("loginUsername");
+        const passwordText = document.getElementById("loginPassword");
 
         initLoginForm();
 
@@ -137,8 +140,7 @@
               <label class="pure-radio">
                 <input type="radio" name="lang" value="${lang.id}">
                 ${CODE_TO_EMOJI[lang.code]}
-              </label>
-          `
+              </label>`
                 )
                 .join("\n");
               initLoginFormClick();
@@ -157,7 +159,7 @@
                 password: loginForm.elements.loginPassword.value,
                 lang: loginForm.elements.lang.value,
               };
-              fetch(`${API_URL}?${new URLSearchParams(formObj)}`)
+              fetch(`${LOGIN_API_URL}?${new URLSearchParams(formObj)}`)
                 .then((response) => response.text())
                 .then((text) => {
                   document.getElementById("login").innerHTML = `
@@ -167,46 +169,114 @@
                     loginForm.remove();
                     change_page();
                   } else {
-                    document.getElementById("loginForm").style.display =
-                      "block";
+                    usernameText.value = "";
+                    passwordText.value = "";
                   }
                 });
             });
-
-            document
-              .getElementById("signUpBtn")
-              .addEventListener("click",(event) =>{
-                event.preventDefault();
-                change_page_register();
-              })
+          initRegisterForm();
         }
-        function initRegisterFormClick() {
-          const loginForm = document.getElementById("loginForm");
 
+        function initRegisterForm() {
           document
-            .getElementById("signInBtn")
+            .getElementById("signUpBtn")
             .addEventListener("click", (event) => {
               event.preventDefault();
-              const formObj = {
-                username: loginForm.elements.loginUsername.value,
-                password: loginForm.elements.loginPassword.value,
-                lang: loginForm.elements.lang.value,
-              };
-              fetch(`${API_URL}?${new URLSearchParams(formObj)}`)
-                .then((response) => response.text())
-                .then((text) => {
-                  document.getElementById("login").innerHTML = `
-                  <h1>${text}</h1>
-                  `;
-                  if (text === "login ok!") {
-                    loginForm.remove();
-                    change_page();
-                  } else {
-                    document.getElementById("loginForm").style.display =
-                      "block";
-                  }
-                });
+              document.getElementById("loginForm").style.display = "none";
+              document.getElementById("login").innerHTML = `
+                  <h1>Register yourself</h1>`;
+              initRegisterFormClick();
             });
+        }
+
+        function initRegisterFormClick() {
+          document.getElementById("registerForm").style.display = "block";
+          const registerForm = document.getElementById("registerForm");
+
+          const registerUsernameText =
+            document.getElementById("registerUsername");
+          const registerPasswordText =
+            document.getElementById("registerPassword");
+          const registerEmailText = document.getElementById("registerEmail");
+
+          document
+            .getElementById("addUser")
+            .addEventListener("click", (event) => {
+              event.preventDefault();
+              fetch(REGISTER_API_URL, {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  username: registerUsernameText.value,
+                  password: registerPasswordText.value,
+                  displayName: registerUsernameText.value,
+                  email: registerEmailText.value,
+                }),
+              })
+                .then(processOkResponse)
+                .then(() => {
+                  document.getElementById("login").innerHTML = `
+                <h1>${registerUsernameText.value} has been registered</h1>`;
+                })
+                .then(
+                  () => (
+                    (registerUsernameText.value = ""),
+                    (registerPasswordText.value = ""),
+                    (registerEmailText.value = "")
+                  )
+                )
+                .then(() => {
+                  document.getElementById("registerForm").style.display =
+                    "none";
+                  document.getElementById("loginForm").style.display = "block";
+                })
+                .catch(console.warn);
+            });
+        }
+
+        function initTodoForm() {
+          fetch(TODO_API_URL)
+            .then(processOkResponse)
+            .then((todos) => todos.forEach(createNewTodo));
+
+          document
+            .getElementById("addTodo")
+            .addEventListener("click", (event) => {
+              event.preventDefault();
+              fetch(TODO_API_URL, {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ text: todoText.value }),
+              })
+                .then(processOkResponse)
+                .then(createNewTodo)
+                .then(() => (todoText.value = ""))
+                .catch(console.warn);
+            });
+
+          function createNewTodo(todo) {
+            const label = document.createElement("label");
+            label.classList.add("pure-checkbox");
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = todo.done;
+            checkbox.addEventListener("click", (event) => {
+              event.preventDefault();
+              fetch(`${TODO_API_URL}/${todo.id}`, { method: "PUT" })
+                .then(processOkResponse)
+                .then((updatedTodo) => (checkbox.checked = !!updatedTodo.done))
+                .catch(console.warn);
+            });
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(` ${todo.text}`));
+            document.getElementById("allTodos").appendChild(label);
+          }
         }
 
         function change_page_register() {

@@ -19,12 +19,13 @@ class RegistrationService {
         return "user " + username + "has been registered! confirmation email has been send to " + email;
     }
 
-    public User createNewUser(String username, String password) {
-        User newUser = new User(username, password);
-        if (repository.findByUsername(username).isEmpty()) {
-            return newUser;
+    public User createNewUser(User user) {
+        if (repository.findByUsername(user.getUsername()).isEmpty()) {
+            return save(user);
+        }else {
+            log.warn("user already exists ");
+            return null;
         }
-        return newUser;
     }
     public User save(User user){
         repository.save(user);
