@@ -1,14 +1,9 @@
 package io.github.bartmy.GroupS.userProfile.user;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Service

@@ -1,5 +1,6 @@
 package io.github.bartmy.GroupS.landingPage.registration;
 
+import io.github.bartmy.GroupS.userProfile.user.User;
 import io.github.bartmy.GroupS.userProfile.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,25 @@ class RegistrationService {
 
     RegistrationService(UserRepository repository){
         this.repository = repository;
+    }
+
+    public String registrationConfirmation(String username, String email){
+        return "user " + username + "has been registered! confirmation email has been send to " + email;
+    }
+
+    public User createNewUser(User user) {
+        var usernameOK= repository.findByUsername(user.getUsername()).isEmpty();
+        var emailOK= repository.findByEmail(user.getEmail()).isEmpty();
+        if (usernameOK && emailOK) {
+            return save(user);
+        }else {
+            log.warn("user already exists ");
+            return null;
+        }
+    }
+    public User save(User user){
+        repository.save(user);
+        return user;
     }
 
 }

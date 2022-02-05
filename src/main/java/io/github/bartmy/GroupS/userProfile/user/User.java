@@ -46,16 +46,15 @@ public class User {
     User() {
     }
 
-    protected User(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    protected User(int id, String username, String password, String displayName, String email) {
-        this.id = id;
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
-        this.displayName = displayName;
+        this.displayName = username;
         this.email = email;
     }
 //

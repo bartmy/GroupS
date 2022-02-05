@@ -3,6 +3,7 @@ package io.github.bartmy.GroupS.landingPage.login;
 import io.github.bartmy.GroupS.userProfile.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Slf4j
@@ -13,6 +14,15 @@ class LoginService {
 
     LoginService(UserRepository repository){
         this.repository = repository;
+    }
+
+
+    String login(String username, String password, Integer langId){
+        if (loginValidation(username, password)){
+            return "login ok!";
+        }else {
+            return loginFailed();
+        }
     }
 
     boolean loginValidation(String username, String password){
