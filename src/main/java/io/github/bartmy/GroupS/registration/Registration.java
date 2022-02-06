@@ -1,4 +1,4 @@
-package io.github.bartmy.GroupS.landingPage.registration;
+package io.github.bartmy.GroupS.registration;
 
 
 public class Registration {

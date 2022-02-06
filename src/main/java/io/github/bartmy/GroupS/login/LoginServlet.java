@@ -1,6 +1,5 @@
-package io.github.bartmy.GroupS.landingPage.login;
+package io.github.bartmy.GroupS.login;
 
-import io.github.bartmy.GroupS.additionals.hello.HelloService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

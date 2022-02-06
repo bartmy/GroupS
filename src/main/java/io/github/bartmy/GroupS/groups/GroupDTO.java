@@ -1,4 +1,4 @@
-package io.github.bartmy.GroupS.userProfile.groups;
+package io.github.bartmy.GroupS.groups;
 
 import lombok.Getter;
 import lombok.Setter;

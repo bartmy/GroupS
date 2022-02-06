@@ -15,6 +15,12 @@
       <div id="login" style="text-align: center">
         <h1>Welcome to GroupS</h1>
       </div>
+      <div id="numberOfUsers" style="text-align: left">
+        <h2>users have been created so far</h2>
+      </div>
+      <div id="numberOfGroups" style="text-align: right">
+        <h2>groups have been created so far</h2>
+      </div>
       <form
         id="loginForm"
         class="pure-form pure-form-stacked"
@@ -131,6 +137,22 @@
             de: "🇩🇪",
             es: "🇪🇸",
           };
+
+          fetch(`${API_URL}/usersnum`)
+            .then((response) => response.text())
+            .then((text) => {
+              document.getElementById("numberOfUsers").innerHTML = `
+              <h3>${text}</h3>`;
+            });
+
+          fetch(`${API_URL}/groupsnum`)
+            .then((response) => response.text())
+            .then((text) => {
+              document.getElementById("numberOfGroups").innerHTML = `
+                  <h3>${text}</h3>
+                  `;
+            });
+
           fetch(`${API_URL}/langs`)
             .then(processOkResponse)
             .then((langArr) => {
@@ -167,7 +189,7 @@
                   `;
                   if (text === "login ok!") {
                     loginForm.remove();
-                    change_page();
+                    // window.location.href = "menu.html";
                   } else {
                     usernameText.value = "";
                     passwordText.value = "";

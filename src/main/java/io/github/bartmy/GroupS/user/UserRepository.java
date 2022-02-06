@@ -1,4 +1,4 @@
-package io.github.bartmy.GroupS.userProfile.user;
+package io.github.bartmy.GroupS.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -9,6 +9,8 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> findByUsername(String username);
+
+    List<User> findByUserId(Integer userId);
 
     List<User> findByUsernameAndPassword(String username, String password);
 
