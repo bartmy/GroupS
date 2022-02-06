@@ -1,4 +1,4 @@
-package io.github.bartmy.GroupS.landingPage;
+package io.github.bartmy.GroupS.zzNotUsedOldClasses;
 
 
 public class LandingPage {

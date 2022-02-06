@@ -1,6 +1,6 @@
-package io.github.bartmy.GroupS.userProfile.user;
+package io.github.bartmy.GroupS.user;
 
-import io.github.bartmy.GroupS.userProfile.groups.Group;
+import io.github.bartmy.GroupS.groups.Group;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -19,7 +19,7 @@ public class User {
     @Id
     @GeneratedValue(generator="inc")
     @GenericGenerator(name="inc", strategy = "increment")
-    private int id;
+    private int userId;
 
     @Column(name = "username")
     private String username;

@@ -1,4 +1,4 @@
-package io.github.bartmy.GroupS.userProfile.user;
+package io.github.bartmy.GroupS.user;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,11 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 class UserDTO {
-    private Integer id;
+    private Integer userId;
     private String username;
 
     public UserDTO(User user){
-        this.id = user.getId();
+        this.userId = user.getUserId();
         this.username = user.getUsername();
     }
 

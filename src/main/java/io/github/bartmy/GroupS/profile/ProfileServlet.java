@@ -1,5 +1,6 @@
-package io.github.bartmy.GroupS.userProfile.profile;
+package io.github.bartmy.GroupS.profile;
 
+import io.github.bartmy.GroupS.user.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +16,9 @@ class ProfileServlet {
     }
 
     @GetMapping(value = "/{userId}")
-    void profileStart(@PathVariable Integer userId){
+    User profileStart(@PathVariable Integer userId){
         log.info("Profile request got");
-        profileService.startMenu(userId);
+        return profileService.startMenuForUserId(userId);
     }
 }
 
