@@ -19,6 +19,7 @@ public class Group {
     @Id
     @GeneratedValue(generator="inc")
     @GenericGenerator(name="inc", strategy = "increment")
+    @Column(name = "group_id")
     private int id;
 
     @Column(name = "group_name")

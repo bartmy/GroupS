@@ -19,7 +19,7 @@ class ProfileService {
         this.repository = repository;
     }
 
-    User startMenuForUserId(Integer userId){
-        return repository.findByUserId(userId).get(0);
-    }
+//    User startMenuForUserId(Integer userId){
+//        return repository.findByUserId(userId).get(0);
+//    }
 }

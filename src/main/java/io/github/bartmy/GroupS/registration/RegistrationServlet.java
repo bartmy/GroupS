@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/register")
+@RequestMapping("/site/register/register.html/api")
 class RegistrationServlet {
 
     private RegistrationService registrationService;
@@ -16,13 +16,13 @@ class RegistrationServlet {
         this.registrationService = service;
     }
 
-    @GetMapping(params = {"username", "password", "email"})
+    @GetMapping(value = "/register", params = {"username", "password", "email"})
     ResponseEntity<String>  register(@RequestParam String username, @RequestParam String password, @RequestParam String email){
         log.info("Registration request got");
         return ResponseEntity.ok("register ok!");
     }
 
-    @PostMapping
+    @PostMapping()
     ResponseEntity<User> saveUser(@RequestBody User user){
         log.info("Got post register request ");
         return ResponseEntity.ok(registrationService.createNewUser(user));
