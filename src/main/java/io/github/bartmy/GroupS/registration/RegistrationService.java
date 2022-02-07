@@ -25,7 +25,11 @@ class RegistrationService {
         if (usernameOK && emailOK) {
             return save(user);
         }else {
-            log.warn("user already exists ");
+            if (!usernameOK){
+                log.warn("username already exists ");
+            }else {
+                log.warn("email already used");
+            }
             return null;
         }
     }

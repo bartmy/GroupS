@@ -15,10 +15,10 @@ class ProfileServlet {
         this.profileService = profileService;
     }
 
-    @GetMapping(value = "/{userId}")
-    User profileStart(@PathVariable Integer userId){
-        log.info("Profile request got");
-        return profileService.startMenuForUserId(userId);
-    }
+//    @GetMapping(value = "/{userId}")
+//    User profileStart(@PathVariable Integer userId){
+//        log.info("Profile request got");
+//        return profileService.startMenuForUserId(userId);
+//    }
 }
 
