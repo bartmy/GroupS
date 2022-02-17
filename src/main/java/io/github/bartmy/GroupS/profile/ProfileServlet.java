@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/profile")
+@RequestMapping("/site/profile/profile.html/api")
 class ProfileServlet {
 
     private ProfileService profileService;
@@ -15,10 +15,15 @@ class ProfileServlet {
         this.profileService = profileService;
     }
 
-//    @GetMapping(value = "/{userId}")
-//    User profileStart(@PathVariable Integer userId){
-//        log.info("Profile request got");
-//        return profileService.startMenuForUserId(userId);
-//    }
+    @GetMapping()
+    String profileStart(){
+        log.info("Profile request got");
+        return profileService.printMenu();
+    }
+    @GetMapping(value = "/{userId}")
+    String profileStart(@PathVariable Integer userId){
+        log.info("Profile request got");
+        return profileService.printUserData(userId);
+    }
 }
 
