@@ -20,7 +20,7 @@ public class Group {
     @GeneratedValue(generator="inc")
     @GenericGenerator(name="inc", strategy = "increment")
     @Column(name = "group_id")
-    private int id;
+    private int groupId;
 
     @Column(name = "group_name")
     private String groupName;
@@ -38,8 +38,7 @@ public class Group {
     Group() {
     }
 
-    public Group(int id, String groupName, String owner) {
-        this.id = id;
+    public Group(String groupName, String owner) {
         this.groupName = groupName;
         this.owner = owner;
     }

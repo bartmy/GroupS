@@ -20,7 +20,7 @@ public class User {
     @GeneratedValue(generator="inc")
     @GenericGenerator(name="inc", strategy = "increment")
     @Column(name = "user_id")
-    private int id;
+    private int userId;
 
     @Column(name = "username")
     private String username;

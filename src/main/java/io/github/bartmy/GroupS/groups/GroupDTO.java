@@ -10,7 +10,7 @@ class GroupDTO {
     private String groupName;
 
     public GroupDTO(Group group){
-        this.id = group.getId();
+        this.id = group.getGroupId();
         this.groupName = group.getGroupName();
     }
 

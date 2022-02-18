@@ -94,7 +94,7 @@
   }
 
   function change_page_to_menu() {
-    window.location.replace("site/menu/menu.html");
+    window.location.replace("site/profile/profile.html");
   }
 
   function processOkResponse(response = {}) {
