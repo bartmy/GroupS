@@ -12,4 +12,5 @@ interface GroupRepository  extends JpaRepository<Group, Integer> {
 
     List<Group> findByGroupName(String groupName);
     List<Group> findByOwner(String owner);
+    List<Group> findByGroupId(Integer Id);
 }

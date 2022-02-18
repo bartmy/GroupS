@@ -1,17 +1,22 @@
-package io.github.bartmy.GroupS.profile;
+package io.github.bartmy.GroupS.userProfile;
+
 
 import io.github.bartmy.GroupS.user.User;
 import io.github.bartmy.GroupS.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Slf4j
 @Service
-class ProfileService {
+class UserProfileService {
 
     private UserRepository repository;
 
-    ProfileService(UserRepository repository){
+    UserProfileService(UserRepository repository){
         this.repository = repository;
     }
 
@@ -27,7 +32,6 @@ class ProfileService {
     }
     String printMenu(){
         return """
-
                  what do you want to do ?\s
                 1. my data\s
                 2. change my data\s
@@ -36,5 +40,16 @@ class ProfileService {
                 5. enter group\s
                 6. create new group\s
                 0. logout""";
+    }
+    User findByUserId(Integer Id){
+        return repository.findByUserId(Id).get(0);
+    }
+//    User saveChanges(){
+//        var user = findByUserId()
+//        repository.save()
+//    }
+    User change(User user){
+        repository.save(user);
+        return user;
     }
 }
