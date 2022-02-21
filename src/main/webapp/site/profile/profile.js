@@ -1,7 +1,7 @@
 (function () {
-  const API_URL = "http://localhost:8080/site/register/register.html/api";
-  const REGISTER_API_URL = `${API_URL}`;
-  const registerForm = document.getElementById("registerForm");
+  const PROFILE_API_URL =
+    "http://localhost:8080//site/profile/profile.html/api";
+  const USER_API_URL = `${user.id}`;
 
   const registerUsernameText = document.getElementById("registerUsername");
   const registerPasswordText = document.getElementById("registerPassword");

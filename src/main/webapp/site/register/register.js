@@ -23,7 +23,7 @@
       }),
     })
       .then(() => {
-        alert("you have been registered<");
+        alert("you have been registered");
       })
 
       .then(() => {

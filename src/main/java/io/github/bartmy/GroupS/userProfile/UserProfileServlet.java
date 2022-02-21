@@ -23,13 +23,8 @@ class UserProfileServlet {
     }
     @GetMapping(value = "/{userId}")
     String profileStart(@PathVariable Integer userId){
-        log.info("Profile request got");
+        log.info("profileStart request got");
         return service.printUserData(userId);
-    }
-    @PutMapping()
-    ResponseEntity<User> changeUserData(@RequestBody User user){
-        log.info("Got put todo request ");
-        return ResponseEntity.ok(service.change(user));
     }
 }
 

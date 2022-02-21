@@ -69,6 +69,6 @@ function initLoginFormClick() {
         }
       });
   });
-  loadScript("js/register.js");
+  // loadScript("js/register.js");
   initRegisterForm();
 }
