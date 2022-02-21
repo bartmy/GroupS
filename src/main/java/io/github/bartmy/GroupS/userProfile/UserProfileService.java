@@ -1,14 +1,10 @@
 package io.github.bartmy.GroupS.userProfile;
 
 
-import io.github.bartmy.GroupS.user.User;
-import io.github.bartmy.GroupS.user.UserRepository;
+import io.github.bartmy.GroupS.userProfile.user.User;
+import io.github.bartmy.GroupS.userProfile.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
 
 @Slf4j
 @Service

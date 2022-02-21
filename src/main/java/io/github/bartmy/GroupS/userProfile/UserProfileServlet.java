@@ -1,6 +1,6 @@
 package io.github.bartmy.GroupS.userProfile;
 
-import io.github.bartmy.GroupS.user.User;
+import io.github.bartmy.GroupS.userProfile.user.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

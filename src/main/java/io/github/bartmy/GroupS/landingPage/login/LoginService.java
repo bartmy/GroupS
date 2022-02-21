@@ -1,6 +1,6 @@
-package io.github.bartmy.GroupS.login;
+package io.github.bartmy.GroupS.landingPage.login;
 
-import io.github.bartmy.GroupS.user.UserRepository;
+import io.github.bartmy.GroupS.userProfile.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

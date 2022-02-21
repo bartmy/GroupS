@@ -1,4 +1,4 @@
-package io.github.bartmy.GroupS.login;
+package io.github.bartmy.GroupS.landingPage.login;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
