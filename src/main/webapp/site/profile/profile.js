@@ -1,6 +1,5 @@
 (function () {
   const PROFILE_API_URL = "http://localhost:8080/api/site/profile/profile.html";
-  // const USER_API_URL = `${PROFILE_API_URL}/${username}`;
 
   initProfile(username);
 })();

@@ -19,11 +19,11 @@ class LandingPageService {
 
     String getNumberOfUsers(){
         log.info("number of users " + userRepository.findAll().size());
-        return userRepository.findAll().size() + " users have been created";
+        return userRepository.findAll().size() + "";
     }
     String getNumberOfGroups(){
         log.info("number of groups " + groupRepository.findAll().size());
-        return groupRepository.findAll().size() + " groups have been created";
+        return groupRepository.findAll().size() + "";
     }
 
 }
