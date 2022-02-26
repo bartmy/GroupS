@@ -21,10 +21,9 @@ class UserProfileService {
     void startMenuForUserId(Integer userId){
 
     }
-    String printUserData(Integer userId){
-        String username = repository.findByUserId(userId).get(0).getUsername();
-        String email = repository.findByUserId(userId).get(0).getEmail();
-        String displayName = repository.findByUserId(userId).get(0).getDisplayName();
+    String printUserData(String username){
+        String email = repository.findByUsername(username).get(0).getEmail();
+        String displayName = repository.findByUsername(username).get(0).getDisplayName();
         return "Username " + username + " email: " + email + " displayName: " + displayName;
     }
     String printMenu(){

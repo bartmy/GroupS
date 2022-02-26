@@ -70,7 +70,7 @@
                   `;
           if (text === "login ok!") {
             loginForm.remove();
-            startProfile(user);
+            startProfile(loginUser.username);
           } else {
             usernameText.value = "";
             passwordText.value = "";
@@ -103,11 +103,12 @@
     window.location.replace("site/login/login.html");
   }
 
-  function startProfile(user) {
+  function startProfile(username) {
     const API_URL = "http://localhost:8080/api";
-    const PROFILE_URL = `${API_URL}//site/profile/profile.html/api`;
+    const PROFILE_URL = `${API_URL}/site/profile/profile.html`;
 
-    window.location.replace(`${PROFILE_URL}/${user.id}`);
+    window.location.replace(`${PROFILE_URL}/${username}`);
+    // window.location.replace(`${PROFILE_URL}`);
   }
 
   function processOkResponse(response = {}) {

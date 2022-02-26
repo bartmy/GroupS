@@ -24,6 +24,7 @@ class LoginServlet {
         log.info("Login request got");
         loginService.login(username, password, langId);
 //        return ResponseEntity.ok(loginService.login(username, password, langId));
+        log.info("Login request passed");
         return ResponseEntity.ok("login ok!");
     }
 //
