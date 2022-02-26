@@ -1,6 +1,6 @@
-package io.github.bartmy.GroupS.user;
+package io.github.bartmy.GroupS.userProfile.user;
 
-import io.github.bartmy.GroupS.groups.Group;
+import io.github.bartmy.GroupS.groupProfile.groups.Group;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;

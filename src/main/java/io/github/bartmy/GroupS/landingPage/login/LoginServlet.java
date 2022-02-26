@@ -1,5 +1,6 @@
-package io.github.bartmy.GroupS.login;
+package io.github.bartmy.GroupS.landingPage.login;
 
+import io.github.bartmy.GroupS.userProfile.user.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,10 @@ class LoginServlet {
     @GetMapping(value = "/login", params = {"username", "password", "lang"})
     ResponseEntity<String> login(@RequestParam String username, @RequestParam String password, @RequestParam("lang") Integer langId){
         log.info("Login request got");
-        return ResponseEntity.ok(loginService.login(username, password, langId));
+        loginService.login(username, password, langId);
+//        return ResponseEntity.ok(loginService.login(username, password, langId));
+        log.info("Login request passed");
+        return ResponseEntity.ok("login ok!");
     }
 //
 //    @GetMapping(value = "/", params = {"username", "password", "lang"})

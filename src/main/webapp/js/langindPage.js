@@ -57,12 +57,12 @@
 
     document.getElementById("signInBtn").addEventListener("click", (event) => {
       event.preventDefault();
-      const formObj = {
+      const loginUser = {
         username: loginForm.elements.loginUsername.value,
         password: loginForm.elements.loginPassword.value,
         lang: loginForm.elements.lang.value,
       };
-      fetch(`${LOGIN_API_URL}?${new URLSearchParams(formObj)}`)
+      fetch(`${LOGIN_API_URL}?${new URLSearchParams(loginUser)}`)
         .then((response) => response.text())
         .then((text) => {
           document.getElementById("login").innerHTML = `
@@ -70,13 +70,20 @@
                   `;
           if (text === "login ok!") {
             loginForm.remove();
-            change_page_to_menu();
+            startProfile(loginUser.username);
           } else {
             usernameText.value = "";
             passwordText.value = "";
           }
         });
     });
+    //   fetch(`${LOGIN_API_URL}?${new URLSearchParams(loginUser)}`)
+    //     .then(processOkResponse)
+    //     .then(response) => ())
+    //     .then(startProfile(user))
+    //     .then(() => ((usernameText.value = ""), (passwordText.value = "")))
+    //     .catch(console.warn);
+    // });
   }
 
   function initRegisterForm() {
@@ -92,9 +99,16 @@
   function change_page_register() {
     window.location.replace("site/register/register.html");
   }
+  function change_page_login() {
+    window.location.replace("site/login/login.html");
+  }
 
-  function change_page_to_menu() {
-    window.location.replace("site/profile/profile.html");
+  function startProfile(username) {
+    const API_URL = "http://localhost:8080/api";
+    const PROFILE_URL = `${API_URL}/site/profile/profile.html`;
+
+    window.location.replace(`${PROFILE_URL}/${username}`);
+    // window.location.replace(`${PROFILE_URL}`);
   }
 
   function processOkResponse(response = {}) {

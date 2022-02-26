@@ -1,33 +1,29 @@
 package io.github.bartmy.GroupS.userProfile;
 
 
-import io.github.bartmy.GroupS.user.User;
-import io.github.bartmy.GroupS.user.UserRepository;
+import io.github.bartmy.GroupS.landingPage.login.LoginService;
+import io.github.bartmy.GroupS.userProfile.user.User;
+import io.github.bartmy.GroupS.userProfile.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
 
 @Slf4j
 @Service
 class UserProfileService {
 
     private UserRepository repository;
+    private LoginService loginService;
 
     UserProfileService(UserRepository repository){
         this.repository = repository;
     }
 
-    User startMenuForUserId(Integer userId){
+    void startMenuForUserId(Integer userId){
 
-        return repository.findByUserId(userId).get(0);
     }
-    String printUserData(Integer userId){
-        String username = repository.findByUserId(userId).get(0).getUsername();
-        String email = repository.findByUserId(userId).get(0).getEmail();
-        String displayName = repository.findByUserId(userId).get(0).getDisplayName();
+    String printUserData(String username){
+        String email = repository.findByUsername(username).get(0).getEmail();
+        String displayName = repository.findByUsername(username).get(0).getDisplayName();
         return "Username " + username + " email: " + email + " displayName: " + displayName;
     }
     String printMenu(){
@@ -48,8 +44,4 @@ class UserProfileService {
 //        var user = findByUserId()
 //        repository.save()
 //    }
-    User change(User user){
-        repository.save(user);
-        return user;
-    }
 }

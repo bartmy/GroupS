@@ -1,13 +1,13 @@
 package io.github.bartmy.GroupS.userProfile;
 
-import io.github.bartmy.GroupS.user.User;
+import io.github.bartmy.GroupS.userProfile.user.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/site/profile/profile.html/api")
+@RequestMapping("/api/site/profile/profile.html")
 class UserProfileServlet {
 
     private UserProfileService service;
@@ -21,15 +21,10 @@ class UserProfileServlet {
         log.info("Profile request got");
         return service.printMenu();
     }
-    @GetMapping(value = "/{userId}")
-    String profileStart(@PathVariable Integer userId){
-        log.info("Profile request got");
-        return service.printUserData(userId);
-    }
-    @PutMapping()
-    ResponseEntity<User> changeUserData(@RequestBody User user){
-        log.info("Got put todo request ");
-        return ResponseEntity.ok(service.change(user));
+    @GetMapping(value = "/{username}")
+    ResponseEntity<String> profileStart(@PathVariable String username){
+        log.info("profileStart request got");
+        return ResponseEntity.ok(service.printUserData(username));
     }
 }
 

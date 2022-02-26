@@ -1,9 +1,7 @@
 package io.github.bartmy.GroupS.groupProfile;
 
-import io.github.bartmy.GroupS.groups.Group;
-import io.github.bartmy.GroupS.groups.GroupRepository;
-import io.github.bartmy.GroupS.user.User;
-import io.github.bartmy.GroupS.user.UserRepository;
+import io.github.bartmy.GroupS.groupProfile.groups.Group;
+import io.github.bartmy.GroupS.groupProfile.groups.GroupRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
