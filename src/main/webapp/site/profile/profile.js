@@ -5,40 +5,18 @@
 })();
 
 function initProfile(username) {
+  printMenu(`${PROFILE_API_URL}/${username}`);
+
   fetch(`${PROFILE_API_URL}/${username}`)
     .then((response) => response.text())
     .then((text) => {
       document.getElementById("username").innerHTML = `
-              <h3>${text}</h3>`;
+              <h2>${text}</h2>`;
+    });
+  fetch(`${PROFILE_API_URL}/menu`)
+    .then((response) => response.text())
+    .then((text) => {
+      document.getElementById("menu").innerHTML = `
+              <h2>${text}</h2>`;
     });
 }
-
-// document.getElementById("addUser").addEventListener("click", (event) => {
-//   event.preventDefault();
-//   fetch(REGISTER_API_URL, {
-//     method: "POST",
-//     headers: {
-//       Accept: "application/json",
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       username: registerUsernameText.value,
-//       password: registerPasswordText.value,
-//       displayName: registerUsernameText.value,
-//       email: registerEmailText.value,
-//     }),
-//   })
-//     .then(() => {
-//       alert("you have been registered");
-//     })
-
-//     .then(() => {
-//       document.getElementById("registerForm").style.display = "none";
-//       change_page_login();
-//     })
-//     .catch(console.warn);
-// });
-// function change_page_login() {
-//   const INDEX_URL = "http://localhost:8080/index.html";
-//   window.location.replace(INDEX_URL);
-// }

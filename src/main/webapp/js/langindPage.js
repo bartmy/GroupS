@@ -1,10 +1,7 @@
 (function () {
   const API_URL = "http://localhost:8080/api";
-  //   const TODO_API_URL = `${API_URL}/todos`;
   const LOGIN_API_URL = `${API_URL}/login`;
-  //   const REGISTER_API_URL = `${API_URL}/register`;
 
-  //   const todoText = document.getElementById("todoText");
   const usernameText = document.getElementById("loginUsername");
   const passwordText = document.getElementById("loginPassword");
 

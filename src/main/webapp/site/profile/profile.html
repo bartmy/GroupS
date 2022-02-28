@@ -12,20 +12,16 @@
   </head>
   <body>
     <header>
-      <h1>
-        Welcome
-        <div id="username">User123</div>
-      </h1>
+      <h1>Welcome</h1>
     </header>
     <main>
-      <style>
-        .custom-restricted-width {
-          /* To limit the menu width to the content of the menu: */
-          /* display: inline-block; */
-          /* Or set the width explicitly: */
-          width: 10em;
-        }
-      </style>
+      <div id="username">User123</div>
+      <div>
+        <fieldset id="menu" class="pure-u-1 pure-control-group">
+          Loading...
+        </fieldset>
+      </div>
+
       <div class="pure-menu custom-restricted-width">
         <span class="pure-menu-heading">Menu</span>
         <ul class="pure-menu-list">
@@ -57,6 +53,6 @@
       </div>
     </main>
 
-    <script></script>
+    <script src="profile.js"></script>
   </body>
 </html>

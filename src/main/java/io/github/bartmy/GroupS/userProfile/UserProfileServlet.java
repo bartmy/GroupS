@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/site/profile/profile.html")
@@ -16,15 +18,21 @@ class UserProfileServlet {
         this.service = service;
     }
 
-    @GetMapping()
-    String profileStart(){
-        log.info("Profile request got");
-        return service.printMenu();
-    }
+//    @GetMapping()
+//    String profileStart(){
+//        log.info("Profile request got");
+//        return service.printMenu();
+//    }
     @GetMapping(value = "/{username}")
-    ResponseEntity<String> profileStart(@PathVariable String username){
-        log.info("profileStart request got");
+    ResponseEntity<String> printUserData(@PathVariable String username){
+        log.info("printUserData request got");
         return ResponseEntity.ok(service.printUserData(username));
+    }
+
+    @GetMapping(value = "/menu")
+    String menu(){
+        log.info("menu request got");
+        return "service.menu();";
     }
 }
 
