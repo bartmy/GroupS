@@ -9,7 +9,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/site/profile/profile.html")
+@RequestMapping("/api/site/profile/profile.html/api")
 class UserProfileServlet {
 
     private UserProfileService service;
@@ -23,6 +23,7 @@ class UserProfileServlet {
 //        log.info("Profile request got");
 //        return service.printMenu();
 //    }
+
     @GetMapping(value = "/{username}")
     ResponseEntity<String> printUserData(@PathVariable String username){
         log.info("printUserData request got");
@@ -30,9 +31,16 @@ class UserProfileServlet {
     }
 
     @GetMapping(value = "/menu")
-    String menu(){
+    ResponseEntity<String> menu(){
         log.info("menu request got");
-        return "service.menu();";
+        return ResponseEntity.ok("service.menu()");
     }
+
+
+//    @GetMapping(value = "/menu")
+//    ResponseEntity<List<String>> menu(){
+//        log.info("menu request got");
+//        return ResponseEntity.ok(service.menu());
+//    }
 }
 

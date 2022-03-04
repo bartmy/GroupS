@@ -1,9 +1,7 @@
 (function () {
+  const LOCAL_URL = "http://localhost:8080";
   const API_URL = "http://localhost:8080/api";
   const LOGIN_API_URL = `${API_URL}/login`;
-
-  const usernameText = document.getElementById("loginUsername");
-  const passwordText = document.getElementById("loginPassword");
 
   initLoginForm();
   initRegisterForm();
@@ -31,43 +29,49 @@
                   `;
       });
 
-    fetch(`${API_URL}/langs`)
-      .then(processOkResponse)
-      .then((langArr) => {
-        document.getElementById("langs").innerHTML = langArr
-          .map(
-            (lang) => `
-              <label class="pure-radio">
-                <input type="radio" name="lang" value="${lang.id}">
-                ${CODE_TO_EMOJI[lang.code]}
-              </label>`
-          )
-          .join("\n");
-        initLoginFormClick();
-      });
+    // fetch(`${API_URL}/langs`)
+    //   .then(processOkResponse)
+    //   .then((langArr) => {
+    //     document.getElementById("langs").innerHTML = langArr
+    //       .map(
+    //         (lang) => `
+    //           <label class="pure-radio">
+    //             <input type="radio" name="lang" value="${lang.id}">
+    //             ${CODE_TO_EMOJI[lang.code]}
+    //           </label>`
+    //       )
+    //       .join("\n");
+    //   });
+    initLoginFormClick();
   }
 
   function initLoginFormClick() {
     const loginForm = document.getElementById("loginForm");
     const usernameText = document.getElementById("loginUsername");
     const passwordText = document.getElementById("loginPassword");
+    const PROFILE_API_URL =
+      "http://localhost:8080/api/site/profile/profile.html";
 
     document.getElementById("signInBtn").addEventListener("click", (event) => {
       event.preventDefault();
       const loginUser = {
         username: loginForm.elements.loginUsername.value,
         password: loginForm.elements.loginPassword.value,
-        lang: loginForm.elements.lang.value,
+        // lang: loginForm.elements.lang.value,
       };
       fetch(`${LOGIN_API_URL}?${new URLSearchParams(loginUser)}`)
         .then((response) => response.text())
+        // .then((text) => {
+        //   document.getElementById("login").innerHTML = `
+        //           <h1>${text}</h1>
+        //           `;
+        // })
+        // .then(startProfile(loginUser.username));
         .then((text) => {
-          document.getElementById("login").innerHTML = `
-                  <h1>${text}</h1>
-                  `;
           if (text === "login ok!") {
             loginForm.remove();
-            startProfile(loginUser.username);
+            // startProfile();
+            initProfile(loginUser.username);
           } else {
             usernameText.value = "";
             passwordText.value = "";
@@ -100,12 +104,11 @@
     window.location.replace("site/login/login.html");
   }
 
-  function startProfile(username) {
-    const API_URL = "http://localhost:8080/api";
-    const PROFILE_URL = `${API_URL}/site/profile/profile.html`;
+  function startProfile() {
+    const PROFILE_URL = `${LOCAL_URL}/site/profile/profile.html`;
 
-    window.location.replace(`${PROFILE_URL}/${username}`);
-    // window.location.replace(`${PROFILE_URL}`);
+    // window.location(`${PROFILE_URL}`);
+    window.location.replace(`${PROFILE_URL}`);
   }
 
   function processOkResponse(response = {}) {
@@ -115,8 +118,3 @@
     throw new Error(`Status not 200 (${response.status})`);
   }
 })();
-function loadScript(src) {
-  var el = document.createElement("script");
-  el.src = src;
-  document.body.appendChild(el);
-}

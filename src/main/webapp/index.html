@@ -12,115 +12,117 @@
   </head>
   <body>
     <main style="width: 40%; margin: 0 auto">
-      <div id="login" style="text-align: center">
-        <h1>Welcome to GroupS</h1>
-      </div>
-      <div style="text-align: left">
-        <div id="numberOfUsers" style="display: inline-block"></div>
-        <p style="display: inline-block">users have been created so far</p>
-      </div>
-      <div style="text-align: right">
-        <div id="numberOfGroups" style="display: inline-block"></div>
-        <p style="display: inline-block">groups have been created so far</p>
-      </div>
+      <div class="content">
+        <div id="login" style="text-align: center">
+          <h1>Welcome to GroupS</h1>
+        </div>
+        <div style="text-align: left">
+          <div id="numberOfUsers" style="display: inline-block"></div>
+          <p style="display: inline-block">users have been created so far</p>
+        </div>
+        <div style="text-align: right">
+          <div id="numberOfGroups" style="display: inline-block"></div>
+          <p style="display: inline-block">groups have been created so far</p>
+        </div>
 
-      <form
-        id="loginForm"
-        class="pure-form pure-form-stacked"
-        style="width: 60%; margin: 0 auto"
-      >
-        <fieldset>
-          <label for="loginUsername">Username</label>
-          <input
-            type="text"
-            id="loginUsername"
-            class="pure-input-rounded pure-u-1"
-            placeholder="Username"
-          />
-          <label for="loginPassword">Password</label>
-          <input
-            type="password"
-            id="loginPassword"
-            class="pure-input-rounded pure-u-1"
-            placeholder="Password"
-          />
-        </fieldset>
-        <fieldset id="langs" class="pure-u-1 pure-control-group">
-          Loading...
-        </fieldset>
-        <button
-          type="submit"
-          id="signInBtn"
-          class="pure-button pure-button-primary"
+        <form
+          id="loginForm"
+          class="pure-form pure-form-stacked"
+          style="width: 60%; margin: 0 auto"
         >
-          Sign in
-        </button>
-        <button
-          type="submit"
-          id="signUpBtn"
-          class="pure-button pure-button-primary"
-        >
-          Sign up
-        </button>
-      </form>
-
-      <form
-        id="todoForm"
-        class="pure-form"
-        style="display: none; text-align: center"
-      >
-        <fieldset>
-          <input
-            id="todoText"
-            class="pure-input-rounded pure-input-2-3"
-            placeholder="new TODO"
-          />
-          <button id="addTodo" class="pure-button pure-button-primary">
-            +
-          </button>
-        </fieldset>
-        <fieldset id="allTodos"></fieldset>
-      </form>
-
-      <form
-        id="registerForm"
-        class="pure-form pure-form-aligned"
-        style="display: none; text-align: center"
-      >
-        <fieldset>
-          <div class="pure-control-group">
-            <label for="registerUsername">Username</label>
+          <fieldset>
+            <label for="loginUsername">Username</label>
             <input
               type="text"
-              id="registerUsername"
-              placeholder="username..."
+              id="loginUsername"
+              class="pure-input-rounded pure-u-1"
+              placeholder="Username"
             />
-          </div>
-          <div class="pure-control-group">
-            <label for="registerPassword">Password</label>
+            <label for="loginPassword">Password</label>
             <input
               type="password"
-              id="registerPassword"
-              placeholder="password..."
+              id="loginPassword"
+              class="pure-input-rounded pure-u-1"
+              placeholder="Password"
             />
-          </div>
-          <div class="pure-control-group">
-            <label for="registerEmail">Email Address</label>
-            <input type="email" id="registerEmail" placeholder="email..." />
-          </div>
-          <div class="pure-controls">
-            <button
-              type="submit"
-              id="addUser"
-              class="pure-button pure-button-primary"
-            >
-              Submit
+          </fieldset>
+          <!-- <fieldset id="langs" class="pure-u-1 pure-control-group">
+            Loading...
+          </fieldset> -->
+          <button
+            type="submit"
+            id="signInBtn"
+            class="pure-button pure-button-primary"
+          >
+            Sign in
+          </button>
+          <button
+            type="submit"
+            id="signUpBtn"
+            class="pure-button pure-button-primary"
+          >
+            Sign up
+          </button>
+        </form>
+
+        <form
+          id="todoForm"
+          class="pure-form"
+          style="display: none; text-align: center"
+        >
+          <fieldset>
+            <input
+              id="todoText"
+              class="pure-input-rounded pure-input-2-3"
+              placeholder="new TODO"
+            />
+            <button id="addTodo" class="pure-button pure-button-primary">
+              +
             </button>
-          </div>
-        </fieldset>
-      </form>
-      <div>
-        <img src="img\GroupS.logo.jpg" />
+          </fieldset>
+          <fieldset id="allTodos"></fieldset>
+        </form>
+
+        <form
+          id="registerForm"
+          class="pure-form pure-form-aligned"
+          style="display: none; text-align: center"
+        >
+          <fieldset>
+            <div class="pure-control-group">
+              <label for="registerUsername">Username</label>
+              <input
+                type="text"
+                id="registerUsername"
+                placeholder="username..."
+              />
+            </div>
+            <div class="pure-control-group">
+              <label for="registerPassword">Password</label>
+              <input
+                type="password"
+                id="registerPassword"
+                placeholder="password..."
+              />
+            </div>
+            <div class="pure-control-group">
+              <label for="registerEmail">Email Address</label>
+              <input type="email" id="registerEmail" placeholder="email..." />
+            </div>
+            <div class="pure-controls">
+              <button
+                type="submit"
+                id="addUser"
+                class="pure-button pure-button-primary"
+              >
+                Submit
+              </button>
+            </div>
+          </fieldset>
+        </form>
+        <div>
+          <img src="img\GroupS.logo.jpg" />
+        </div>
       </div>
     </main>
     <script src="js/langindPage.js"></script>

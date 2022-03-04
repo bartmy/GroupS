@@ -19,10 +19,13 @@ class LoginServlet {
         this.loginService = loginService;
     }
 
-    @GetMapping(value = "/login", params = {"username", "password", "lang"})
-    ResponseEntity<String> login(@RequestParam String username, @RequestParam String password, @RequestParam("lang") Integer langId){
+//    @GetMapping(value = "/login", params = {"username", "password", "lang"})
+    @GetMapping(value = "/login", params = {"username", "password"})
+//    ResponseEntity<String> login(@RequestParam String username, @RequestParam String password, @RequestParam("lang") Integer langId){
+    ResponseEntity<String> login(@RequestParam String username, @RequestParam String password){
         log.info("Login request got");
-        loginService.login(username, password, langId);
+//        loginService.login(username, password, langId);
+        loginService.login(username, password);
 //        return ResponseEntity.ok(loginService.login(username, password, langId));
         log.info("Login request passed");
         return ResponseEntity.ok("login ok!");

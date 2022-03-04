@@ -19,7 +19,8 @@ class LoginService {
     }
 
 
-    User login(String username, String password, Integer langId){
+//    User login(String username, String password, Integer langId){
+    User login(String username, String password){
         if (loginValidation(username, password)){
             return repository.findByUsernameAndPassword(username, password).get(0);
         }else {
